@@ -1,0 +1,28 @@
+﻿
+@model IEnumerable<WebApplication2.Kategori>
+
+@{ 
+
+    Layout = null;
+
+        }
+<div class="widget categories">
+    <h5>Kategoriler</h5>
+    <ul>
+        @foreach (var kat in Model)
+        {
+             <li><a href="/Kategori/Index/@kat.id">@kat.Adi &nbsp; (@kat.Makale.Count)</a></li>
+           
+        }
+
+        <li><a href="#">Applications &amp; UI Kits</a></li>
+        <li><a href="#">Backgrounds &amp; Textures</a></li>
+        <li><a href="#">Patterns &amp; Brushes</a></li>
+        <li><a href="#">Branding &amp; Logos</a></li>
+        <li><a href="#">Devices &amp; Mock-ups</a></li>
+        <li><a href="#">Fonts &amp; Typography</a></li>
+        <li><a href="#">Forms &amp; Buttons</a></li>
+        <li><a href="#">Websites &amp; Web Tech</a></li>
+    </ul>
+</div>
+

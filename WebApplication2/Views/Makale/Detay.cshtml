@@ -1,0 +1,95 @@
+﻿@model WebApplication2.Makale
+@{
+    ViewBag.Title = "Detay";
+}
+
+
+<article class="blog-post">
+    <header>
+        <h2>
+            <a href="/Makale/Detay/@Model.id">@Model.Baslik </br> chups lollipop I love lemon drops.</a>
+        </h2>
+        <ul class="info">
+            <li><a href="/Kategori/İndex/@Model.KategoriID">{ @Model.KategoriID }</a></li>
+            <li><a href="/Makale/TariheGoreLise?yil=@Model.YayimTarihi.Year&ay=@Model.YayimTarihi.Month">{ @Model.YayimTarihi.ToString("MMMMM yyyy") }</a></li>
+            <li><a href="/Yazar/İndex/@Model.YazarID">{ @Model.Kulllanici.Adi @Model.Kulllanici.Soyadi }</a></li>
+            <li>{ Yorumlar: <a href="#Yorum">@Model.Yorum.Count()</a> }</li>
+        </ul>
+    </header>
+    <div class="text-editor">
+       
+        @Model.İcerik 
+
+        <div class="author-wrap">
+            <div class="author">
+                <figure>
+                    <a href="/Yazar/Index/@Model.YazarID">
+                        <img src="@Model.Resim.KucukResimYol" alt="#" />
+                    </a>
+                </figure>
+                <div class="name">@Model.Kulllanici.Adi @Model.Kulllanici.Soyadi</div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+<a id="Yorum" />
+<div class="comments">
+    <h3>
+       @Model.Yorum.Count Yorum
+    </h3>
+    <ul>
+        @foreach (var yorum in Model.Yorum)
+
+        {
+            <li class="comment">
+            <div class="user">
+                <figure>
+                    <a href="#">
+                        <img src="@yorum." alt="" />
+                    </a>
+                </figure>
+                <div class="name text-center">
+                    <a href="#">Thisis Stan</a>
+                </div>
+            </div>
+            <div class="comment-box">
+                <div class="info">
+                    <div class="time-ago">24 minutes ago</div>
+                </div>
+                <div class="text">
+                    Jelly I love apple pie tart tootsie roll tiramisu bonbon I love.
+                    I love I love cookie cotton candy. Danish candy muffin lollipop. Chocolate
+                </div>
+                <div class="likes">
+                    <a href="#">
+                        <i class="fa fa-heart"></i>
+                    </a>
+                </div>
+            </div>
+        </li>
+        }
+    </ul>
+</div>
+<div class="write-comment">
+    <h3>Write a comment</h3>
+    <div class="user">
+        <figure>
+            <a href="#">
+                <img src="content/no-photo-user.png" alt="" />
+            </a>
+        </figure>
+        <div class="name text-center">
+            <a href="#">Olivetty</a>
+        </div>
+    </div>
+    <div class="textarea-wrap">
+        <form action="#">
+            <textarea placeholder="write something smart" name="comment-message"></textarea>
+            <button type="submit" class="send">Send</button>
+        </form>
+    </div>
+    <hr>
+</div>
+                        

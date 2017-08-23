@@ -1,0 +1,81 @@
+﻿@{ 
+
+    Layout = null;
+
+}
+<div class="widget posts">
+    <h5>Makaleler</h5>
+    <div class="widget-tabs">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#popular" data-toggle="tab">Popüler</a></li>
+            <li><span>/</span></li>
+            <li><a href="#fresh" data-toggle="tab">Tazeler</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="popular">
+                <ul>
+  @{ 
+
+      WebApplication2.Makale m = new WebApplication2.Makale();
+
+  }
+                    
+
+                    @foreach (var pop in ViewBag.Populer)
+                    {
+
+
+
+
+                    <li>
+                        <figure>
+                            <a href="/Makale/Detay/@pop.id">
+                                <img src="@pop.Resim.KucukResimYol" alt="">
+                            </a>
+                        </figure>
+                        <div class="text">
+                            <a href="/Makale/Detay/@pop">@pop.Baslik</a>
+                            <a href="/Kategori/İndex/@pop" class="category">{@pop}</a>
+                        </div>
+                    </li>
+
+
+
+                    }
+                   
+                  
+                  
+                </ul>
+            </div>
+            <div class="tab-pane" id="fresh">
+                <ul>
+
+
+                    @foreach (var son in ViewBag.Fresh)
+                    {
+
+                   
+
+                    <li>
+                        <figure>
+                            <a href="/Makale/Detay/@son.id">
+                                <img src="@son.Resim.KucukResimYol" alt="">
+                            </a>
+                        </figure>
+                        <div class="text">
+                            <a href="#">/Makale/Detay/@son.id>@son.Baslik</a>
+                            <a href="/Kategori/Index/@son.KategoriID" class="category">{ @son.Kategori.Adi }</a>
+                        </div>
+                    </li>
+
+
+                       }
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

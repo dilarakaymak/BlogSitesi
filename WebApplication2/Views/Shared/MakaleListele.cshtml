@@ -1,0 +1,59 @@
+﻿@model IEnumerable<WebApplication2.Makale>
+@{
+
+    Layout = null;
+
+}
+
+@helper Kisalt(string metin)
+    {
+if (metin.Length > 300)
+{
+        <p> metin.Substring(0, 300); </p>
+}
+else
+{
+    <p> @metin  </p>
+}
+}
+
+@foreach (var makale in Model)
+
+{
+
+<article class="blog-post">
+    <header>
+        <h2>
+            <a href="/Makale/Detay/@makale.id">@makale.Baslik </a>
+
+
+         </h2>
+
+
+         <ul class="info">
+            <li><a href="/Kategori/İndex/@makale">{ @makale.Kategori.Adi}</a></li>
+            <li><a href="/Makale/TariheGoreListe?yil=@makale.YayimTarihi.Year&ay=@makale.YayimTarihi.Month">{@makale.YayimTarihi.ToString("MMMM YYYY")}</a></li>
+            <li><a href="/Yazar/İndex/@makale.YazarID">{@makale.Kulllanici.Adi @makale.Kulllanici.Soyadi}</a></li>
+            <li>{ Yorumlar: <a href="#"> @makale.Yorum.Count() </a>}</li>
+            <li>{ Beğeni: @makale.Begeni}</li>
+            <li>{ Görüntülenme:  @makale.Goruntulenme}</li>
+        </ul>
+
+</header>
+<div class="content">
+    <figure>
+        <a href="/Makale/Detay/@makale.id">
+            < img src="@makale.Resim.OrtaResimYol" alt="" />
+        </a>
+    </figure>
+    <div class="text">
+       @{ 
+           Kisalt(makale.İcerik);
+       }
+    </div>
+    <a href="/Makale/Detay/@makale.id" class="btn btn-default">Oku</a>
+</div>
+</article>
+
+
+}
