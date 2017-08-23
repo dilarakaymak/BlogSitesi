@@ -3,6 +3,38 @@
     ViewBag.Title = "Detay";
 }
 
+@helper SureYaz(DateTime tarih)
+    {
+TimeSpan sure = DateTime.Now - tarih;
+if (sure.TotalMilliseconds < 0)
+{
+        <div class="time-ago"></div>
+}
+else if (sure.TotalMilliseconds > 1)
+{
+
+if (sure.TotalMinutes < 1)
+{
+        <div class="time-ago">Şimdi</div>
+    }
+else if (sure.TotalHours < 1)
+{
+         <div class="time-ago">@sure.Minutes Dakika Önce</div>
+}
+else if (sure.TotalDays < 1)
+{
+
+        <div class="time-ago">@sure.Hours Saat Önce</div>
+}
+else
+{
+       <div class="time-ago">@tarih.ToString("dd.MM.yyyy") tarihinde</div>
+}
+
+
+}
+}
+
 
 <article class="blog-post">
     <header>
@@ -47,49 +79,52 @@
             <div class="user">
                 <figure>
                     <a href="#">
-                        <img src="@yorum." alt="" />
+                        <img src="@yorum.Kulllanici.Resim" alt="" />
                     </a>
                 </figure>
                 <div class="name text-center">
-                    <a href="#">Thisis Stan</a>
+                    <a href="#">@yorum.Kulllanici.Adi @yorum.Kulllanici.Soyadi</a>
                 </div>
             </div>
             <div class="comment-box">
                 <div class="info">
-                    <div class="time-ago">24 minutes ago</div>
+                    @SureYaz(yorum.EklenmeTarihi)
                 </div>
                 <div class="text">
-                    Jelly I love apple pie tart tootsie roll tiramisu bonbon I love.
-                    I love I love cookie cotton candy. Danish candy muffin lollipop. Chocolate
+                    @yorum.İcerik
                 </div>
-                <div class="likes">
-                    <a href="#">
-                        <i class="fa fa-heart"></i>
-                    </a>
-                </div>
+               
             </div>
         </li>
         }
     </ul>
 </div>
+@{ 
+    WebApplication2.Kulllanici k = new WebApplication2.Kulllanici();
+}
+@if (ViewBag.Kulllanici != null)
+{
+    
 <div class="write-comment">
-    <h3>Write a comment</h3>
+    <h3>Yorum Yaz</h3>
     <div class="user">
         <figure>
             <a href="#">
-                <img src="content/no-photo-user.png" alt="" />
+                <img src="@ViewBag.Kulllanici.Resim.KucukResimYol" alt="" />
             </a>
         </figure>
         <div class="name text-center">
-            <a href="#">Olivetty</a>
+            <a href="#">@ViewBag.Kulllani.Adi @ViewBag.Kulllanici.Soyadi</a>
         </div>
     </div>
     <div class="textarea-wrap">
-        <form action="#">
-            <textarea placeholder="write something smart" name="comment-message"></textarea>
-            <button type="submit" class="send">Send</button>
+        <input type="hidden" name="YazarId" value="@ViewBag.Kulllanici.id" />
+        <input type="hidden" name="MakaleID" value="@Model.id" />
+        <form action="/Makale/YorumYaz" method="post">
+            <textarea name="icerik" name="comment-message"></textarea>
+            <button type="submit" class="send">Gönder</button>
         </form>
     </div>
     <hr>
 </div>
-                        
+}                      

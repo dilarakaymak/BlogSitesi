@@ -32,8 +32,31 @@ namespace WebApplication2.Controllers
 
         public ActionResult Detay(int id)
         {
+
+           if(Session["Kulllanici"]!=null)
+            {
+                ViewBag.Kulllanici = Session["Kulllanici"];
+            }
+            else
+            {
+                ViewBag.Kulllanici = new Kulllanici();
+            }
+
+
             Makale mk = context.Makale.FirstOrDefault(x => x.id == id);
             return View(mk);
+        }
+
+        [HttpPost]
+        public ActionResult YorumYaz(Yorum yorum)
+        {
+            yorum.EklenmeTarihi = DateTime.Now;
+            yorum.Baslk = "";
+            yorum.Kulllanici.Aktif = false;
+            context.Yorum.Add(yorum);
+            context.SaveChanges();
+            return RedirectToAction("Detay", new { id = yorum.MakaleID });
+
         }
     }
 }
