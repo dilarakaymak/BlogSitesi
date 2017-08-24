@@ -14,6 +14,7 @@ namespace WebApplication2.Controllers
         B301_BlogEntities context = new B301_BlogEntities();
         public ActionResult Index()
         {
+
             return View();
         }
 
