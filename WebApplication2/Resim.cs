@@ -21,7 +21,8 @@ namespace WebApplication2
             this.Makale = new HashSet<Makale>();
             this.Makale1 = new HashSet<Makale>();
         }
-    
+
+        public static string FileName { get; internal set; }
         public int id { get; set; }
         public string Adi { get; set; }
         public string KucukResimYol { get; set; }
