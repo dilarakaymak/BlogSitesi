@@ -42,15 +42,17 @@ namespace WebApplication2.Controllers
                 string[] etikets = etiketler.Split(',');
                 foreach(string etiket in etikets)
                 {
-                    Etiket etk=context.Etiket.Fir
-                    if(context.Etiket.Any(x => string.Adi.ToLower() == etiket.ToLower().Trim()))
+                    Etiket etk = context.Etiket.FirstOrDefault(x => x.Adi.ToLower() == etiket.ToLower().Trim());
+                    if(etk!=null)
                     {
-                        //Etiket Var
+                    
+                        etk = new Etiket();
+                        etk.Adi = etiket;
+                        context.Etiket.Add(etk);
+                        context.SaveChanges();
                     }
-                    else
-                    {
-                        //Etiket Yok
-                    }
+                    makale.Etiket.Add(etk);
+                    context.SaveChanges();
                 }
 
             }
