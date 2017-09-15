@@ -1,0 +1,37 @@
+﻿@model WebApplication2.Kategori
+
+@{
+    ViewBag.Title = "KategoriEkle";
+}
+
+<h2>KategoriEkle</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Kategori Ekle</legend>
+
+        <div class=" editor-label">
+            Kategori Adı
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model=>model.Adi)
+            @Html.ValidationMessageFor(model=>model.Adi)
+        </div>
+
+
+        <p>
+            <input type="submit" value="Kaydet" />
+        </p>
+
+    </fieldset>
+
+}
+
+<div>
+    @Html.ActionLink("Listeye Dön", "Kategori")
+</div>
+

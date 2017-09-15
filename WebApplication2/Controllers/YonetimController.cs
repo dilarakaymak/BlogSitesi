@@ -35,7 +35,7 @@ namespace WebApplication2.Controllers
                 makale.YayimTarihi = DateTime.Now;
                 makale.MakaleTypeID = 1;
                 makale.YazarID = aktif.id;
-                makale.KapakResimID = ResimKaydet(Resim);
+                makale.KapakResimID = ResimKaydet(Resim, HttpContext);
                 context.Makale.Add(makale);
                 context.SaveChanges();
 
@@ -56,11 +56,14 @@ namespace WebApplication2.Controllers
                 }
 
             }
-            return View();
+            return RedirectToAction("Index");
         }
 
-        private int ResimKaydet(HttpPostedFileBase Resim)
+        public static int ResimKaydet(HttpPostedFileBase Resim, HttpContextBase ctx)
         {
+            B301_BlogEntities context = new B301_BlogEntities();
+            
+
             int kucukWidght = Convert.ToInt32(ConfigurationManager.AppSettings["kw"]);
             int kucukHeight = Convert.ToInt32(ConfigurationManager.AppSettings["kh"]);
             int ortaWidght = Convert.ToInt32(ConfigurationManager.AppSettings["ow"]);
@@ -73,13 +76,13 @@ namespace WebApplication2.Controllers
             Image orjRes = Image.FromStream(Resim.InputStream);
             Bitmap kucukRes = new Bitmap(orjRes, kucukWidght, kucukHeight);
             Bitmap ortaRes = new Bitmap(orjRes, ortaWidght, ortaHeight);
-            Bitmap buyukRes = new Bitmap(orjRes, buyukWidght, buyukHeight);
+            Bitmap buyukRes = new Bitmap(orjRes);
 
-            kucukRes.Save(Server.MapPath("~/Content/Resimler/Kucuk/" + newName));
-            ortaRes.Save(Server.MapPath("~/Content/Resimler/Orta/" + newName));
-            buyukRes.Save(Server.MapPath("~/Content/Resimler/Buyuk/" + newName));
+            kucukRes.Save(ctx.Server.MapPath("~/Content/Resimler/Kucuk/" + newName));
+            ortaRes.Save(ctx.Server.MapPath("~/Content/Resimler/Orta/" + newName));
+            buyukRes.Save(ctx.Server.MapPath("~/Content/Resimler/Buyuk/" + newName));
 
-            Kulllanici k = (Kulllanici)Session["Kulllanici"]; 
+            Kulllanici k = (Kulllanici)ctx.Session["Kulllanici"]; 
 
             Resim dbRes = new Resim();
             dbRes.Adi = Resim.FileName;
@@ -87,6 +90,7 @@ namespace WebApplication2.Controllers
             dbRes.OrtaResimYol = "/Content/Resimler/Orta/" + newName;
             dbRes.KucukResimYol = "/Content/Resimler/Kucuk/" + newName;
 
+            dbRes.EklemeTarihi = DateTime.Now;
             dbRes.EkleyenID = k.id;
 
             context.Resim.Add(dbRes);
@@ -96,5 +100,47 @@ namespace WebApplication2.Controllers
 
             
         }
+
+        public ActionResult Kategori()
+        {
+            ViewBag.Tip = 1;
+            return View(context.Kategori.ToList());
+        }
+
+        public ActionResult KategoriEkle()
+        {
+            ViewBag.Tip = 1;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult KategoriEkle(Kategori kat)
+        {
+            context.Kategori.Add(kat);
+            context.SaveChanges();
+            return RedirectToAction("Kategori");
+        }
+
+        public ActionResult KategoriDuzenle(int id)
+        {
+            ViewBag.Tip = 1;
+            return View(context.Kategori.FirstOrDefault(x => x.id == id));
+        }
+
+        [HttpPost]
+        public ActionResult KategoriDuzenle(Kategori kat)
+        {
+            context.Entry(kat).State = System.Data.EntityState.Modified;
+            context.SaveChanges();
+            return RedirectToAction("Kategori");
+        }
+
+        public ActionResult KategoriSil(int id)
+        {
+            context.Kategori.Remove(context.Kategori.FirstOrDefault(x => x.id == id));
+            context.SaveChanges();
+            return RedirectToAction("Kategori");
+        }
+
     }   
 }

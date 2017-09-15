@@ -167,6 +167,7 @@
     <Compile Include="Controllers\EtiketController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KategoriController.cs" />
+    <Compile Include="Controllers\KullaniciController.cs" />
     <Compile Include="Controllers\MakaleController.cs" />
     <Compile Include="Controllers\YazarController.cs" />
     <Compile Include="Controllers\YonetimController.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="SiteTakip.cs">
       <DependentUpon>BlogContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="System\Data\EntityState.cs" />
     <Compile Include="Yorum.cs">
       <DependentUpon>BlogContext.tt</DependentUpon>
     </Compile>
@@ -540,14 +542,18 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -565,6 +571,12 @@
     <Content Include="Views\Makale\Detay.cshtml" />
     <Content Include="Views\Shared\YonetimMasteri.cshtml" />
     <Content Include="Views\Yonetim\MakaleYaz.cshtml" />
+    <Content Include="Views\Kullanici\KayitOl.cshtml" />
+    <Content Include="Views\Kullanici\GirisYap.cshtml" />
+    <Content Include="Views\Yonetim\Index.cshtml" />
+    <Content Include="Views\Yonetim\Kategori.cshtml" />
+    <Content Include="Views\Yonetim\KategoriEkle.cshtml" />
+    <Content Include="Views\Yonetim\KategoriDuzenle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

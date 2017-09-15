@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "KayitOl";
+}
+
+<h2>KayitOl</h2>
+@using (Html.BeginForm("KayitOl", "Kullanici", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<table>
+    <tr>
+        <td>Kullanıcı Adı</td>
+        <td> <input class="form-control" type="text" name="Nick" value="" required /> </td>
+    </tr>
+    <tr>
+        <td>Parola</td>
+        <td> <input class="form-control" type="password" name="Parola" value="" required /> </td>
+    </tr>
+    <tr>
+        <td>Parola Tekrar</td>
+        <td> <input class="form-control" type="password" name="ParolaTekrar" value="" required /> </td>
+    </tr>
+    <tr>
+        <td>Adı</td>
+        <td> <input class="form-control" type="text" name="Adi" value="" required /> </td>
+    </tr>
+    <tr>
+        <td>Soyadı</td>
+        <td> <input class="form-control" type="text" name="Soyadi" value="" required /> </td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td> <input class="form-control" type="email" name="mail" value="" required /> </td>
+    </tr>
+    <tr>
+        <td>Resim</td>
+        <td> <input class="form-control" type="file" name="Resim" value=""  /> </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td> <input class="form-control" type="submit" name="btnKayitOl" value="Kayıt Ol"  /> </td>
+    </tr>
+</table>
+}

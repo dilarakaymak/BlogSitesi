@@ -33,15 +33,7 @@ namespace WebApplication2.Controllers
         public ActionResult Detay(int id)
         {
 
-           if(Session["Kulllanici"]!=null)
-            {
-                ViewBag.Kulllanici = Session["Kulllanici"];
-            }
-            else
-            {
-                ViewBag.Kulllanici = new Kulllanici();
-            }
-
+            ViewBag.Kulllanici = Session["Kullanici"];
 
             Makale mk = context.Makale.FirstOrDefault(x => x.id == id);
             return View(mk);

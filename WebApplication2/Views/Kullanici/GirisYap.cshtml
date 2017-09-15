@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "GirisYap";
+}
+
+<h2>GirisYap</h2>
+
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td colspan="2">
+                @ViewBag.Mesaj
+            </td>
+        </tr>
+        <tr>
+            <td>Kullanıcı Adı</td>
+            <td> <input class="text" name="kullaniciAdi" value="" required /> </td>
+        </tr>
+        <tr>
+            <td>Parola</td>
+            <td> <input class="password" name="Parola" value="" required /> </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td> <input class="form-control" type="submit" name="btnGiris" value="Giriş" /> </td>
+        </tr>
+    </table>
+}

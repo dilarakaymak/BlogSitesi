@@ -1,0 +1,31 @@
+﻿@model IEnumerable<WebApplication2.Makale>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>Makaleler</h2>
+
+
+<table>
+    <tr>
+        <th>Başlık</th>
+        <th>Yazar</th>
+        <th>Kategori</th>
+        <th>Yayım Tarihi</th>
+        
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>@item.Baslik</td>
+        <td>@item.Kulllanici.Adi @item.Kulllanici.Soyadi</td>
+        <td>@item.Kategori.Adi</td>
+        <td>@item.YayimTarihi</td>
+
+        <td></td>
+    </tr>
+    }
+</table>
+

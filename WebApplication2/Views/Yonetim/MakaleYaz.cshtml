@@ -1,0 +1,70 @@
+﻿@model WebApplication2.Makale
+
+@{
+    ViewBag.Title = "MakaleYaz";
+}
+
+<h2>YENİ MAKALE OLUŞTUR</h2>
+
+<div class="tabs-top">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#top-tab1" data-toggle="tab">Metin</a></li>
+        <li><a href="#top-tab2" data-toggle="tab">Resim Galerisi</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="top-tab1">
+
+            @using (Html.BeginForm("MakaleYaz", "Yonetim", FormMethod.Post,new { enctype = "multipart/form-data" }))
+            {
+
+                    <tr>
+                        <td>Başlık</td>
+                        <td>
+                            <input class="form-control" type="text" name="Baslik" value="" placeholder="Başlık Giriniz" />
+                        </td>
+                    </tr>
+                    <td>
+                    
+                        <td>Kategori</td>
+                    </td>
+                    <select name="KategoriID">
+                        @foreach (var kategori in ViewBag.Kategoriler)
+                        {
+                            <option value="@kategori.id">
+                                @kategori.Adi
+
+                            </option>
+                        }
+                    </select> 
+                    <tr>
+                        
+                        <td>Etiketler</td>
+                        <td><input class="form-control" type="text" name="etiketler" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td>Resim</td>
+                        <td>
+                            <input type="file" name="Resim" value="" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>İçerik</td>
+                        <td><textarea class="form-control" name="Icerik" placeholder="Makale içeriğini giriniz" cols="20" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input class="form-control" type="submit" name="btnEkle" value="Kaydet" />
+                        </td>
+                    </tr>
+               
+            }
+
+        </div>
+        <div class="tab-pane" id="top-tab2">
+            Galeri
+        </div>
+     </div>
+</div>
+
+

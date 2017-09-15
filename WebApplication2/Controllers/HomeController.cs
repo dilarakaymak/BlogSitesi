@@ -10,7 +10,7 @@ namespace WebApplication2.Controllers
 {
     public class HomeController : Controller
     {
-        // B301_BlogEntities1 context = new B301_BlogEntities1();
+        //B301_BlogEntities1 context = new B301_BlogEntities1();
         B301_BlogEntities context = new B301_BlogEntities();
         public ActionResult Index()
         {
@@ -49,17 +49,12 @@ namespace WebApplication2.Controllers
             return View(tags);
 
         }
-        
 
         public ActionResult TumMakalelerGetir()
         {
             var makaleler = context.Makale.ToList();
             return View("MakaleListele", makaleler);
         }
-
-        
-        
-
 
     }
 }
